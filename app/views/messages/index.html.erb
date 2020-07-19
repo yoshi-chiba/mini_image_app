@@ -1,0 +1,7 @@
+<h1><%= link_to "新規投稿", new_message_path %></h1>
+<% @messages.each do |message| %>
+  <%= message.content %>
+  <%= image_tag message.image.variant(resize: '100x100') if message.image.present? %>
+  <%= link_to "編集", edit_message_path(message.id) %>
+  <br>
+<% end %>
