@@ -1,5 +1,13 @@
-<%= form_with model: @message, local: true do |f| %>
+<label for='' id='click-upload'>
+  ここをクリックして画像をアップロード
+</label>
+<% if @message.images.attached? %>
+  <% @message.images.each do |image| %>
+    <%= image_tag image.variant(resize: '100x100') %>
+  <% end %>
+<% end %>
+<%= form_with model: @message, id: 'new_message', local: true do |f| %>
   <%= f.text_field :content, placeholder: 'type a message' %>
-  <%= f.file_field :image %>
+  <%= f.file_field :images, name: 'message[images][]', data:{index: 0} %>
   <%= f.submit '送信' %>
 <% end %>
